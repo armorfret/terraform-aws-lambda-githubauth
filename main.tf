@@ -3,12 +3,14 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 module "certificate" {
-  source    = "github.com/akerl/terraform-aws-acm-certificate"
+  source    = "armorfret/acm-certificate/aws"
+  version   = "0.0.1"
   hostnames = ["${var.domain}"]
 }
 
 module "publish-user" {
-  source         = "github.com/akerl/terraform-aws-s3-publish"
+  source         = "armorfret/terraform-aws-s3-publish"
+  version        = "0.0.1"
   logging-bucket = "${var.logging-bucket}"
   publish-bucket = "${var.config-bucket}"
 }
@@ -57,7 +59,8 @@ data "aws_iam_policy_document" "lambda_perms" {
 }
 
 module "lambda" {
-  source = "github.com/akerl/terraform-aws-lambda"
+  source  = "armorfret/lambda/aws"
+  version = "0.0.1"
 
   lambda-bucket  = "${var.lambda-bucket}"
   lambda-version = "${var.version}"
