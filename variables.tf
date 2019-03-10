@@ -1,20 +1,25 @@
 variable "version" {
-  type    = "string"
-  default = "v0.1.0"
+  description = "Version of the Lambda to use"
+  type        = "string"
+  default     = "v0.1.0"
 }
 
-variable "logging-bucket" {
-  type = "string"
+variable "logging_bucket" {
+  description = "S3 bucket to use for bucket logging"
+  type        = "string"
 }
 
-variable "lambda-bucket" {
-  type = "string"
+variable "lambda_bucket" {
+  description = "S3 bucket from which to read the Lambda ZIP"
+  type        = "string"
 }
 
-variable "config-bucket" {
-  type = "string"
+variable "config_bucket" {
+  description = "S3 bucket to use for configuration"
+  type        = "string"
 }
 
-variable "domain" {
-  type = "string"
+variable "hostname" {
+  description = "Hostname to use for serving site"
+  type        = "string"
 }
