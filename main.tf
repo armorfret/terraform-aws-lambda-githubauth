@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "lambda_perms" {
 
 module "apigw" {
   source  = "armorfret/apigw-lambda/aws"
-  version = "0.0.1"
+  version = "0.0.2"
 
   source_bucket  = "${var.lambda_bucket}"
   source_version = "${var.version}"
