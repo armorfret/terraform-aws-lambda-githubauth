@@ -9,8 +9,8 @@ terraform {
 module "publish-user" {
   source         = "armorfret/s3-publish/aws"
   version        = "0.1.1"
-  logging_bucket = "${var.logging_bucket}"
-  publish_bucket = "${var.config_bucket}"
+  logging_bucket = var.logging_bucket
+  publish_bucket = var.config_bucket
 }
 
 data "aws_iam_policy_document" "lambda_perms" {
@@ -43,16 +43,16 @@ module "apigw" {
   source  = "armorfret/apigw-lambda/aws"
   version = "0.1.6"
 
-  source_bucket  = "${var.lambda_bucket}"
-  source_version = "${var.lambda_version}"
+  source_bucket  = var.lambda_bucket
+  source_version = var.lambda_version
   function_name  = "githubauth-${var.config_bucket}"
 
   environment_variables = {
-    S3_BUCKET = "${var.config_bucket}"
+    S3_BUCKET = var.config_bucket
     S3_KEY    = "config.yaml"
   }
 
-  access_policy_document = "${data.aws_iam_policy_document.lambda_perms.json}"
+  access_policy_document = data.aws_iam_policy_document.lambda_perms.json
 
-  hostname = "${var.hostname}"
+  hostname = var.hostname
 }
