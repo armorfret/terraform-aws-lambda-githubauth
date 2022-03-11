@@ -1,14 +1,15 @@
 terraform {
   required_providers {
     aws = {
-      version = "3.4.0"
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
     }
   }
 }
 
 module "publish-user" {
   source         = "armorfret/s3-publish/aws"
-  version        = "0.1.1"
+  version        = "0.2.1"
   logging_bucket = var.logging_bucket
   publish_bucket = var.config_bucket
 }
@@ -41,7 +42,7 @@ data "aws_iam_policy_document" "lambda_perms" {
 
 module "apigw" {
   source  = "armorfret/apigw-lambda/aws"
-  version = "0.1.6"
+  version = "0.2.0"
 
   source_bucket  = var.lambda_bucket
   source_version = var.lambda_version
