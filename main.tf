@@ -9,7 +9,7 @@ terraform {
 
 module "publish-user" {
   source         = "armorfret/s3-publish/aws"
-  version        = "0.4.0"
+  version        = "0.6.0"
   logging_bucket = var.logging_bucket
   publish_bucket = var.config_bucket
 }
