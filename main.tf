@@ -9,7 +9,7 @@ terraform {
 
 module "publish-user" {
   source         = "armorfret/s3-publish/aws"
-  version        = "0.7.0"
+  version        = "0.8.0"
   logging_bucket = var.logging_bucket
   publish_bucket = var.config_bucket
 }
@@ -35,14 +35,14 @@ data "aws_iam_policy_document" "lambda_perms" {
     ]
 
     resources = [
-      "arn:aws:logs:*:*:*",
+      "arn:aws:logs:*:*:log-group:/aws/lambda/githubauth-${var.config_bucket}:*",
     ]
   }
 }
 
 module "apigw" {
   source  = "armorfret/apigw-lambda/aws"
-  version = "0.4.2"
+  version = "0.7.1"
 
   source_bucket  = var.lambda_bucket
   source_version = var.lambda_version
