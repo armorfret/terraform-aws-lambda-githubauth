@@ -31,6 +31,15 @@ data "aws_iam_policy_document" "lambda_perms" {
     actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
+    ]
+
+    resources = [
+      "arn:aws:logs:*:*:log-group:/aws/lambda/githubauth-${var.config_bucket}",
+    ]
+  }
+
+  statement {
+    actions = [
       "logs:PutLogEvents",
     ]
 
