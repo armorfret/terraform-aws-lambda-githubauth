@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "lambda_perms" {
 
 module "apigw" {
   source  = "armorfret/apigw-lambda/aws"
-  version = "0.8.0"
+  version = "0.9.0"
 
   source_bucket  = var.lambda_bucket
   source_version = var.lambda_version
@@ -65,4 +65,6 @@ module "apigw" {
   access_policy_document = data.aws_iam_policy_document.lambda_perms.json
 
   hostname = var.hostname
+
+  cloudwatch_retention_in_days = var.cloudwatch_retention_in_days
 }
